@@ -1,9 +1,9 @@
 import mongoose, { Schema } from "mongoose";
-import { Course } from "./course";
+import { Course } from "./course.js";
 
 const lessonShema = new mongoose.Schema({
   course: { 
-    type: Schema.Types.ObjectId | String,
+    type: [Schema.Types.ObjectId | String],
     ref: Course,
     required: true
   },

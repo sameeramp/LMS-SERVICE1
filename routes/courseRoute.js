@@ -13,6 +13,6 @@ router.put('/update', verifyToken, updateCourse);
 router.delete('/delete', verifyToken, deleteCourse);
 router.get('/get-one', verifyToken, getOneCourse);
 router.get('/get-all', verifyToken, getAllCourse);
-router.get('/:search', verifyToken, searchCourse)
+router.get('/:search', verifyToken, searchCourse);
 
 export default router;

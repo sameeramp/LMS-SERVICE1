@@ -5,9 +5,7 @@ export const searchCourse = async (req, res) => {
     try {
         const {
             search,
-        } = req.params;  
-        console.log(search, 'search');
-            
+        } = req.params;              
         if(!search.trim()) return res.status(409).send('No search is passed, please check the searchs')
         // Check course exists or not   
         const courseRes = await Course.findOne({course: { $regex: search, $options: 'i' }});        

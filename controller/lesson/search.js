@@ -1,18 +1,16 @@
 import mongoose from 'mongoose';
-import { Course } from '../../models/course.js';
+import { Lesson } from '../../models/lesson.js';
 
-export const searchCourse = async (req, res) => {
+export const searchLesson = async (req, res) => {
     try {
         const {
             search,
-        } = req.params;  
-        console.log(search, 'search');
-            
+        } = req.params;              
         if(!search.trim()) return res.status(409).send('No search is passed, please check the searchs')
-        // Check course exists or not   
-        const courseRes = await Course.findOne({course: { $regex: search, $options: 'i' }});        
-        if (!courseRes) return res.status(409).send('No recorde found, please check the id')
-        return res.status(200).json({...courseRes?._doc, msg: "Fetched Successfulyy"});
+        // Check lesson exists or not   
+        const lessonRes = await Lesson.findOne({lesson: { $regex: search, $options: 'i' }});        
+        if (!lessonRes) return res.status(409).send('No recorde found, please check the id')
+        return res.status(200).json({...lessonRes?._doc, msg: "Fetched Successfulyy"});
     } catch (error) {
         console.log(error, 'error');
         res.status(500).send("Failed, please try later")

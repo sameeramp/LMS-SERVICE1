@@ -11,9 +11,7 @@ export const updateCourse = async (req, res) => {
         // convert to mongo id
         const _id = new mongoose.Types.ObjectId(id);        
         // Check course exists or not
-        const courseData = await Course.findById({_id});
-        console.log(courseData, _id, 'courseData');
-        
+        const courseData = await Course.findById({_id});        
         if (!courseData) return res.status(409).send('Course is not found, please check the id')
         const courseRes = await Course.findByIdAndUpdate({_id}, {course}, {new: true});
         return res.status(200).json({...courseRes._doc, msg: "Updated Successfulyy"});

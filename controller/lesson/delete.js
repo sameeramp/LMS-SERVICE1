@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
-import { Course } from '../../models/course.js';
+import { Lesson } from '../../models/lesson.js';
 
-export const deleteCourse = async (req, res) => {
+export const deleteLesson = async (req, res) => {
     try {
         const {
             id,
@@ -9,8 +9,8 @@ export const deleteCourse = async (req, res) => {
         if(!id) return res.status(409).send('No id passed, please check the id')
         // convert to mongo id
         const _id = new mongoose.Types.ObjectId(id);        
-        // Check course exists or not and delete   
-        const courseRes = await Course.deleteOne({_id});        
+        // Check lesson exists or not and delete   
+        const courseRes = await Lesson.deleteOne({_id});        
         if (courseRes.deletedCount !== 1) return res.status(409).send('Deletion failed, please check the id')
         return res.status(200).json({...courseRes, msg: "Deleted Successfulyy"});
     } catch (error) {
