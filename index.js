@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
 // Register the routes
 app.use("/api/auth", authRoute);
 app.use("/api/lesson", lessonRoute);
-app.use("/api/courese", courseRoute);
+app.use("/api/course", courseRoute);
 
 
 // Start server
