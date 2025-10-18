@@ -18,9 +18,17 @@
   },
   "license": "ISC",
   "author": "Sameera M P",
-  "type": "ES module",
+  "type": "module",
   "main": "index.js",
   "scripts": {
+    "start": "node --experimental-specifier-resolution=node index",
+    "dev": "nodemon --experimental-specifier-resolution=node index",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "mongoose": "^8.19.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
   }
 }
