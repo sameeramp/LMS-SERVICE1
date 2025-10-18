@@ -2,6 +2,9 @@ import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import { config } from 'dotenv';
+import authRoute from './routes/authRoute.js';
+import lessonRoute from './routes/lessonRoute.js';
+import courseRoute from './routes/courseRoute.js';
 import db from './dbConnection.js';
 config();
 
@@ -18,6 +21,7 @@ app.get('/', (req, res) => {
 });
 
 // Register the routes
+app.use("/api/auth", authRoute);
 app.use("/api/lesson", lessonRoute);
 app.use("/api/courese", courseRoute);
 
