@@ -1,0 +1,26 @@
+{
+  "name": "learning-management-system---backend",
+  "version": "1.0.0",
+  "description": "Design and implement a Learning Management System (LMS)",
+  "keywords": [
+    "LMS",
+    "Learning",
+    "Managemen",
+    "System"
+  ],
+  "homepage": "https://github.com/sameeramp/-Learning-Management-System---Backend#readme",
+  "bugs": {
+    "url": "https://github.com/sameeramp/-Learning-Management-System---Backend/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sameeramp/-Learning-Management-System---Backend.git"
+  },
+  "license": "ISC",
+  "author": "Sameera M P",
+  "type": "ES module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
