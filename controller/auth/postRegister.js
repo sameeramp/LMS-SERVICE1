@@ -5,6 +5,8 @@ import { config } from 'dotenv';
 config();
 
 export const postRegister = async(req, res) => {
+    console.log("Entered in postRegister");
+    
     try {
         const {
             username,
