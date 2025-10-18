@@ -12,7 +12,7 @@ export const createLesson = async (req, res) => {
 
         if (!course.trim()) return res.status(409).send('Course is not found');
         if (!content.trim()) return res.status(409).send('No Lesson content is found');
-        const courseId = mongoose.Types.ObjectId(course);
+        const courseId = new mongoose.Types.ObjectId(course);
         // Check Lesson exists or not
         const lessonData = await Lesson.findOne({ lesson })
         const courseData = await Course.findById(courseId);

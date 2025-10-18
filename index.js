@@ -5,6 +5,7 @@ import { config } from 'dotenv';
 import authRoute from './routes/authRoute.js';
 import lessonRoute from './routes/lessonRoute.js';
 import courseRoute from './routes/courseRoute.js';
+import userRoute from './routes/userRoute.js';
 import db from './dbConnection.js';
 config();
 
@@ -24,6 +25,7 @@ app.get('/', (req, res) => {
 app.use("/api/auth", authRoute);
 app.use("/api/lesson", lessonRoute);
 app.use("/api/course", courseRoute);
+app.use("/api/user", userRoute);
 
 
 // Start server

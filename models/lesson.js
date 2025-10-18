@@ -3,7 +3,7 @@ import { Course } from "./course.js";
 
 const lessonShema = new mongoose.Schema({
   course: { 
-    type: [Schema.Types.ObjectId | String],
+    type: Schema.Types.ObjectId,
     ref: Course,
     required: true
   },
@@ -11,6 +11,10 @@ const lessonShema = new mongoose.Schema({
     type: String,
     required: true
   }, 
+  content: {
+    type: String,
+    required: true
+  },
   createdAt: {
     type: Date,
     default: Date.now
