@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import { config } from 'dotenv';
+import db from './dbConnection.js';
 config();
 
 const app = express();
