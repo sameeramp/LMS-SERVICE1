@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import { User } from '../../models/user.js';
 
-export const getOneUser = async (req, res) => {
+export const getUser = async (req, res) => {
     try {
         const {
             id,
