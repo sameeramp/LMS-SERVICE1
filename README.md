@@ -268,13 +268,6 @@ These are the minimal fields expected by the API. Check `models/` for exact shap
 - UserLesson (or progress)
 	- id, userId, lessonId, status (completed/in-progress), completedAt
 
-## Development notes & assumptions
-
-- Authentication uses JWT tokens. The middleware is in `middleware/auth.js`. Include `Authorization: Bearer <token>` on protected endpoints.
-- Database type is not explicitly specified in this README; inspect `dbConnection.js` to determine whether it's MongoDB or SQL. Set `DB_URI` accordingly.
-- Endpoints use controllers under `controller/<resource>/`.
-- Some route names follow a slightly unusual naming (for example `geAll` rather than `getAll`). Use the exact route path as implemented in `routes/` when testing.
-
 ## Quick testing examples (using curl or any HTTP client)
 
 Authenticate and store token:
