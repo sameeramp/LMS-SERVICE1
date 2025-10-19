@@ -15,11 +15,11 @@ export const getStatsUser = async (req, res) => {
         const userLessonRes = await UserLesson.findOne({ user });
         if (!userLessonRes) return res.status(409).send('No record found, please check the id');
         const { progress, course } = userLessonRes || userLessonRes?._doc;
-        const payload = [];
+        const stats = [];
         for (let i = 0; i < course.length; i++) {
             const courseId = course[i];
             const courseObjId = new mongoose.Types.ObjectId(courseId);
-            const courseRes = await Course.findById({ _id: courseObjId });            
+            const courseRes = await Course.findById({ _id: courseObjId });
             const { course: courseName } = courseRes;
             const lessonDoc = await Lesson.find({ course: courseObjId });
             const totalLessons = lessonDoc.length | 0;
@@ -27,10 +27,13 @@ export const getStatsUser = async (req, res) => {
             const matched = progress.filter(elem => ids.has(elem.lesson.toString()));
             const attendedLessons = matched.length | 0;
             const completedLessons = matched.filter(obj => obj.completed);
-            const payloadRes = {[courseName]: [{totalLessons}, {attendedLessons}, {completedLessons: completedLessons.length | 0}]} 
-            payload.push(payloadRes);
-        }        
-        return res.status(200).json({payload, msg: "Data fetched successfully"});
+            const attendedPercentage = (attendedLessons / totalLessons) * 100;
+            const completetedLessonLen = completedLessons.length | 0;
+            const completedPercentage = (completetedLessonLen / totalLessons) * 100;
+            const payload = { [courseName]: [{ totalLessons }, { attendedLessons }, { completedLessons: completetedLessonLen }, { attendedPercentage }, { completedPercentage }] }
+            stats.push(payload);
+        }
+        return res.status(200).json({ stats, msg: "Data fetched successfully" });
     } catch (error) {
         console.log(error, 'error');
         res.status(500).send("Failed, please try later")
