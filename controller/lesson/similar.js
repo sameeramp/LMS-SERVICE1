@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
 import { Lesson } from '../../models/lesson.js';
+
+// For Fetching Similar Lessons Fetching All Lesson Under the Same Course ID
 export const similarLesson = async (req, res) => {
     try {
         const {

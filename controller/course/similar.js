@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import { Course } from '../../models/course.js';
 
+// For Fetching Similar Course, Fetch All Course Name and Split by Space and Match Any Words
 export const similarCourse = async (req, res) => {
     try {
         const {
