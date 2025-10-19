@@ -6,13 +6,15 @@ import { deleteCourse } from '../controller/course/delete.js';
 import { getOneCourse } from '../controller/course/getOne.js';
 import { getAllCourse } from '../controller/course/geAll.js';
 import { searchCourse } from '../controller/course/search.js';
+import { similarCourse } from '../controller/course/similar.js';
 const router = express.Router();
 
-router.post('/create', verifyToken, createCourse);
-router.put('/update', verifyToken, updateCourse);
-router.delete('/delete', verifyToken, deleteCourse);
 router.get('/get-one', verifyToken, getOneCourse);
 router.get('/get-all', verifyToken, getAllCourse);
 router.get('/:search', verifyToken, searchCourse);
+router.get('/:id/similar', verifyToken, similarCourse);
+router.post('/create', verifyToken, createCourse);
+router.put('/update', verifyToken, updateCourse);
+router.delete('/delete', verifyToken, deleteCourse);
 
 export default router;
