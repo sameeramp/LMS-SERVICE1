@@ -294,20 +294,3 @@ $headers = @{ Authorization = "Bearer $env:TOKEN"; 'Content-Type' = 'application
 $body = '{"title":"New Course","description":"...","category":"general"}'
 Invoke-RestMethod -Method Post -Uri http://localhost:3000/course/create -Headers $headers -Body $body
 ```
-
-## Next steps / Improvement ideas
-
-- Add OpenAPI (Swagger) documentation for machine-readable API docs.
-- Add detailed request/response examples and sample data files in `examples/`.
-- Add unit tests and integration tests for controllers.
-- Add seed script to populate sample courses and lessons.
-
-## Completion
-
-This README provides an overview and API documentation for the backend present in this repository. If you'd like, I can:
-
-- Generate OpenAPI (Swagger) docs based on the routes.
-- Add Postman collection or Insomnia export.
-- Inspect `dbConnection.js` and controllers to produce exact request/response JSON shapes and update this README accordingly.
-
-If you'd like me to update the README with concrete examples extracted from the code (exact route names and body schemas), say "Please extract API shapes from code" and I'll read the route and controller files and update the README with exact payloads.
