@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
-const config = process.env;
+import { config } from 'dotenv';
+config();
 
 export const verifyToken = (req, res, next) => {
 
@@ -14,7 +15,7 @@ export const verifyToken = (req, res, next) => {
     
     try {    
         token = token.replace(/^Bearer\s+/, "");
-        const decoded = jwt.verify(token, config.JWT_SECRET_KEY);
+        const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
         req.user = decoded;
       } catch (error) {
         res.status(401).send("Invalid Token");
