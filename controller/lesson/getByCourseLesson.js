@@ -16,7 +16,7 @@ export const getByCourseLesson = async (req, res) => {
         // Check lesson exists or not   
         const lessonRes = await Lesson.find({course: _id}).skip(skip).limit(limit);        
         if (!lessonRes) return res.status(409).send('No recorde found, please check the course id')
-        return res.status(200).json({...lessonRes?._doc, msg: "Fetched Successfulyy"});
+        return res.status(200).json({courseData: lessonRes, msg: "Fetched Successfulyy"});
     } catch (error) {
         console.log(error, 'error');
         res.status(500).send("Failed, please try later")
