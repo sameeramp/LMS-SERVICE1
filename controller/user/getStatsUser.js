@@ -14,7 +14,7 @@ export const getStatsUser = async (req, res) => {
         // Check user exists or not   
         const userLessonRes = await UserLesson.findOne({ user });
         if (!userLessonRes) return res.status(409).send('No record found, please check the id');
-        const { progress, course } = userLessonRes || userLessonRes?._doc;
+        const { progress, course } = userLessonRes || userLessonRes?._doc;        
         const stats = [];
         for (let i = 0; i < course.length; i++) {
             const courseId = course[i];
