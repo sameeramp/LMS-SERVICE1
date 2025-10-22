@@ -15,23 +15,23 @@ export const getStatsUser = async (req, res) => {
         const userLessonRes = await UserLesson.find({ user });
         if (!userLessonRes) return res.status(409).send('No record found, please check the id');
         const stats = [];
-        for (let i = 0; i < userLessonRes.length; i++) {            
+        for (let i = 0; i < userLessonRes.length; i++) {
             const { progress, course } = userLessonRes[i];
-                const courseObjId = new mongoose.Types.ObjectId(course);
-                const courseRes = await Course.findById({ _id: courseObjId });
-                const { course: courseName } = courseRes;
-                const lessonDoc = await Lesson.find({ course: courseObjId });
-                const totalLessons = lessonDoc.length | 0;
-                const ids = new Set(lessonDoc.map(obj => obj._id.toString()));
-                const matched = progress.filter(elem => ids.has(elem.lesson.toString()));
-                const attendedLessons = matched.length | 0;
-                const completedLessons = matched.filter(obj => obj.completed);
-                const attendedPercentage = (attendedLessons / totalLessons) * 100;
-                const completetedLessonLen = completedLessons.length | 0;
-                const completedPercentage = (completetedLessonLen / totalLessons) * 100;
-                const payload = { [courseName]: [{ totalLessons }, { attendedLessons }, { completedLessons: completetedLessonLen }, { attendedPercentage }, { completedPercentage }] };
-                stats.push(payload);
-        }        
+            const courseObjId = new mongoose.Types.ObjectId(course);
+            const courseRes = await Course.findById({ _id: courseObjId });
+            const { course: courseName } = courseRes;
+            const lessonDoc = await Lesson.find({ course: courseObjId });
+            const totalLessons = lessonDoc.length | 0;
+            const ids = new Set(lessonDoc.map(obj => obj._id.toString()));
+            const matched = progress.filter(elem => ids.has(elem.lesson.toString()));
+            const attendedLessons = matched.length | 0;
+            const completedLessons = matched.filter(obj => obj.completed);
+            const attendedPercentage = (attendedLessons / totalLessons) * 100;
+            const completetedLessonLen = completedLessons.length | 0;
+            const completedPercentage = (completetedLessonLen / totalLessons) * 100;
+            const payload = { courseName, totalLessons, attendedLessons, completedLessons: completetedLessonLen, attendedPercentage, completedPercentage };
+            stats.push(payload);
+        }
         return res.status(200).json({ stats, msg: "Data fetched successfully" });
     } catch (error) {
         console.log(error, 'error');
