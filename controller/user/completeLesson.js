@@ -21,13 +21,24 @@ export const completeLessonUser = async (req, res) => {
         const courseRes = await Course.findById({ _id: courseId });
         const lessonRes = await Lesson.findById({ _id: lessonId });
         if (!userRes || !courseRes || !lessonRes) return res.status(409).send('No record found, please check the ids');
-        const userLessonUpdate = await UserLesson.updateOne({ user: userId, course: courseId }, {
-            $addToSet: {
-                progress: { lesson: lessonId, completed: true },
-            },
-        }, { upsert: true });
-        const { modifiedCount } = userLessonUpdate;
-        if (modifiedCount < 1) return res.status(409).send('User Lesson is not updated, maybe lesson already updated');
+        const isLessonUpdate = await UserLesson.findOne({ user: userId, course: courseId, "progress.lesson": lessonId });
+        let userLessonUpdate = null;
+        if (isLessonUpdate) {
+            userLessonUpdate = await UserLesson.updateOne({ user: userId, course: courseId, "progress.lesson": {"$ne": lessonId} }, {
+                $addToSet: {
+                    progress: { lesson: lessonId, completed: true },
+                },
+            });
+
+        } else {
+            userLessonUpdate = await UserLesson.updateOne({ user: userId, course: courseId }, {
+                $addToSet: {
+                    progress: { lesson: lessonId, completed: true },
+                },
+            }, { upsert: true });
+        }
+        // const { modifiedCount } = userLessonUpdate;
+        // if (modifiedCount < 1) return res.status(409).send('User Lesson is not updated, maybe lesson already updated');
         return res.status(200).json({ course, userId, lesson, msg: "Updated Successfulyy" });
     } catch (error) {
         console.log(error, 'error');
