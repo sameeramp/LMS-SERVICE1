@@ -6,7 +6,7 @@ export const similarLesson = async (req, res) => {
     try {
         const {
             id,
-        } = req.query;
+        } = req.params;
         if (!id) return res.status(409).send('No id passed, please check the id');        
         // convert to mongo id
         const _id = new mongoose.Types.ObjectId(id);

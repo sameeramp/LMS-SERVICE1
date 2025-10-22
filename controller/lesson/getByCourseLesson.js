@@ -8,6 +8,8 @@ export const getByCourseLesson = async (req, res) => {
             page = 1,
             perPage = 10
         } = req.query;      
+
+        console.log(req.query,"req.query")
         if(!id) return res.status(409).send('No id passed, please check the id')
         const limit = perPage;
         const skip = (page - 1) * perPage;
