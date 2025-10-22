@@ -20,8 +20,8 @@ export const completeLessonUser = async (req, res) => {
         const userRes = await User.findById(_id);
         const courseRes = await Course.findById({ _id: courseId });
         const lessonRes = await Lesson.findById({ _id: lessonId });        
-        if (!userRes || !courseRes || !lessonRes) return res.status(409).send('No record found, please check the ids');
-        const userLessonUpdate = await UserLesson.updateOne({user: userId, course: courseId, "progress.lesson": lessonId}, {$set: { "progress.$.lesson": lessonId, "progress.$.completed": true }});
+        if (!userRes || !courseRes || !lessonRes) return res.status(409).send('No record found, please check the ids');        
+        const userLessonUpdate = await UserLesson.updateOne({user: userId, course: courseId}, {$set: { "progress.$.lesson": lessonId, "progress.$.completed": true }});
         const {modifiedCount} = userLessonUpdate;
         if (modifiedCount < 1) return res.status(409).send('User Lesson is not updated, maybe lesson already updated');
         return res.status(200).json({ course, userId, lesson, msg: "Updated Successfulyy" });
